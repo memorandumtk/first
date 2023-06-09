@@ -1,0 +1,24 @@
+{% extends "auctions/layout.html" %}
+{% block body %}
+    <h2>Your Watchlist</h2>
+    <div>
+        {% for watch_list in watch_lists %}
+        <div class="clearfix mb-2 border border-dark container">
+            <div class="float-left">
+                <img src="../../media/{{ watch_list.item.image }}" alt="{{ watch_list.item.title }}" width="170" height="170">
+            </div>
+            <div class="float-right">
+                <div>
+                    <a href="{% url 'specific_listing' watch_list.item.id %}">
+                    {{ watch_list.item.title }}
+                    </a>
+                    <br>
+                    Startging Bid ${{ watch_list.item.starting_bid }}
+                </div>
+                <br>
+            </div>
+        </div>
+        <br>
+        {% endfor %} 
+    </div>
+{% endblock %}

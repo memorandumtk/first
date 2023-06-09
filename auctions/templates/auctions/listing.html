@@ -1,0 +1,59 @@
+{% extends "auctions/layout.html" %}
+{% block body %}
+
+    {% if messages %}
+    <div class="p-3 mb-2 bg-warning">
+    <ul class="messages">
+        {% for message in messages %}
+        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>
+            {{ message }}
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}        
+    </div>
+    <h2>Active Listings</h2>
+    <div>
+        {% for listing in listings %}
+        {% if listing.isactive %}
+            <div class="clearfix mb-2 border border-dark container">
+                <div class="float-left">
+                    <img src="media/{{ listing.image }}" alt="{{ listing.title }}" width="170" height="170">
+                </div>
+                <div class="float-right">
+                    <div>
+                        <a href="{% url 'specific_listing' listing_id=listing.id %}">
+                        {{ listing.title }}
+                        </a>
+                    </div>
+                    <br>
+                    <div>
+                        Starting_bid: $ {{ listing.starting_bid }}
+                    </div>
+                    <br>
+                    <div>
+                        {% for bid in bids %}
+                            {% if bid.listing.id == listing.id and bid.current_bid != listing.starting_bid %}
+                            <p class="text-danger">
+                                Current Price: ${{ bid.current_bid }}
+                            </p>
+                            {% else %}
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <br>
+                    <div>
+                        Description: {{ listing.description }}
+                    </div>
+                    <br>
+                    <div>
+                        Category: {{ listing.category.name }}
+                    </div>
+                    <br>
+                </div>
+            </div>
+            <br>
+        {% endif %}
+        {% endfor %}   
+    </div>
+{% endblock %}

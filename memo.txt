@@ -1,0 +1,197 @@
+(djangopra) C:\Users\memor\Documents\SelfStudy\cs50w_project\memorandumtk\blob\web50\projects\2020\x\commerce>python manage.py shell
+Python 3.11.3 | packaged by Anaconda, Inc. | (main, Apr 19 2023, 23:46:34) [MSC v.1916 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>>
+>>> from auctions.models import Listing
+
+
+f = Listing(title="Sapporo beer", description="Japanese beer", starting_bid=300)
+
+
+
+>>> f = Listing(title="Sapporo beer", description="Japanese beer", starting_bid=300)
+>>>
+>>> f.save()
+>>>
+>>> Listing.object.all()
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: type object 'Listing' has no attribute 'object'
+>>>
+>>> Listing.objects.all()
+
+
+
+(djangopra) C:\Users\memor\Documents\SelfStudy\cs50w_project\memorandumtk\blob\web50\projects\2020\x\commerce>python manage.py createsuperuser
+Username: takagi
+Error: That username is already taken.
+Username: kousuke
+Email address: kousuke@example.com
+Password: <<< ghj
+Password (again):
+This password is too short. It must contain at least 8 characters.
+Bypass password validation and create user anyway? [y/N]: y
+Superuser created successfully.
+
+(djangopra) C:\Users\memor\Documents\SelfStudy\cs50w_project\memorandumtk\blob\web50\projects\2020\x\commerce>
+(djangopra) C:\Users\memor\Documents\SelfStudy\cs50w_project\memorandumtk\blob\web50\projects\2020\x\commerce>
+(djangopra) C:\Users\memor\Documents\SelfStudy\cs50w_project\memorandumtk\blob\web50\projects\2020\x\commerce>
+
+
+
+cd C:\Users\memor\Documents\SelfStudy\cs50w_project\memorandumtk\blob\web50\projects\2020\x\commerce
+
+
+## create listing
+## failures list lol
+# def create_listing(request):
+#     x = request.POST['title']
+#     y = request.POST['description']
+#     z = request.POST['starting_bid']
+#     # if request.method == 'POST':
+#     form = ImageForm(request.POST, request.FILES)
+#     if form.is_valid():
+#         form.save()
+#         # # Get the current instance object to display in the template
+#         # img_obj = form.instance
+#         # return render(request, 'auctions/listing.html', {'form': form, 'img_obj': img_obj})
+#         # # return render(request, 'auctions/testimage.html', {'form': form, 'img_obj': img_obj})
+#     listing = Listing(title=x, description=y, starting_bid=z)
+#     listing.save()
+#     return HttpResponseRedirect(reverse('listing'))
+
+# def create_listing(request):
+#     x = request.POST['title']
+#     y = request.POST['description']
+#     z = request.POST['starting_bid']
+#     listing = Listing(title=x, description=y, starting_bid=z)
+#     listing.save()
+#     return HttpResponseRedirect(reverse('listing'))
+
+
+## ref flight
+>>>
+>>> from flights.models import Flight
+>>>
+>>>
+>>> Flight.objects.all()
+<QuerySet [<Flight: 1 : New York (JFK) to London (LHR)>, <Flight: 2 : New York (JFK) to Paris (CDG)>, <Flight: 3 : Shanghai (PVG) to London (LHR)>]>
+>>>
+>>> flight.passengers.all()
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'flight' is not defined
+>>> flight = Flight.objects.get(id=flight_id)
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'flight_id' is not defined
+>>> flight = Flight.objects.get(id=2)
+>>>
+>>> flight.passengers.all()
+<QuerySet [<Passenger: Ron Don flights.Flight.None>, <Passenger: one two flights.Flight.None>]>
+>>> Flight.passengers.all()
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'ManyToManyDescriptor' object has no attribute 'all'
+
+
+## ref listing
+
+>>> from auctions.models import Listing
+>>>
+>>>
+>>>
+>>> Listing.objects.get(id=listing_id)
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'listing_id' is not defined
+>>> Listing.objects.all()
+<QuerySet [<Listing: 6: shin: Korian spricy nuddle: 200>, <Listing: 8: Udon: Japanese nuddle: 200>, <Listing: 9: Pho: Vietnamese nuddle: 200>]>
+>>>
+>>>
+>>> Listing.objects.get(id=2)
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+  File "C:\Users\memor\miniconda3\envs\djangopra\Lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\memor\miniconda3\envs\djangopra\Lib\site-packages\django\db\models\query.py", line 650, in get
+    raise self.model.DoesNotExist(
+auctions.models.Listing.DoesNotExist: Listing matching query does not exist.
+>>>
+>>>
+>>> Listing.objects.get(id=6)
+<Listing: 6: shin: Korian spricy nuddle: 200>
+
+
+## listings admin pass
+kousuke
+ghj
+
+
+
+from auctions.models import Listing
+from auctions.models import Watchlist
+
+
+l = Listing.objects.all()
+q = Watchlist.objects.all()
+
+
+
+
+### manytomany field 's output
+(djangopra) C:\Users\memor\Documents\SelfStudy\cs50w_project\memorandumtk\blob\web50\projects\2020\x\commerce>python manage.py shell
+Python 3.11.3 | packaged by Anaconda, Inc. | (main, Apr 19 2023, 23:46:34) [MSC v.1916 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>>
+>>> q
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'q' is not defined
+>>> from auctions.models import Listing
+>>> from auctions.models import Watchlist
+>>>
+>>>
+>>> l = Listing.objects.all()
+>>> q = Watchlist.objects.all()
+>>>
+>>> l
+<QuerySet [<Listing: 6: shin: Korian spricy nuddle: 200>, <Listing: 8: Udon: Japanese nuddle: 200>, <Listing: 9: Pho: Vietnamese nuddle: 200>]>
+>>>
+>>> q
+<QuerySet [<Watchlist: kousuke 's WatchList, auctions.Listing.None: 1>]>
+>>>
+>>> qfirst = q.first()
+>>>
+>>> qfirst
+<Watchlist: kousuke 's WatchList, auctions.Listing.None: 1>
+>>> q.item
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'QuerySet' object has no attribute 'item'
+>>> q.user
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'QuerySet' object has no attribute 'user'
+>>> qfirst.item
+<django.db.models.fields.related_descriptors.create_forward_many_to_many_manager.<locals>.ManyRelatedManager object at 0x000001D11B19F290>
+>>> qfirst.user
+<User: kousuke>
+>>>
+>>>
+>>> qfirst.id
+1
+>>> qfirst.item.all()
+<QuerySet [<Listing: 6: shin: Korian spricy nuddle: 200>]>
+>>>
+
+>>> Listing.objects
+<django.db.models.manager.Manager object at 0x000001D11B192010>
+>>> Watchlist.objects
+<django.db.models.manager.Manager object at 0x000001D11B192050>
+>>>
+
+

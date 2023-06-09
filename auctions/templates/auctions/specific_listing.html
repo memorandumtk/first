@@ -1,0 +1,97 @@
+{% extends "auctions/layout.html" %}
+{% block body %}
+    {% if bidinfo.user == requestuser and not listing.isactive %}
+    <ul class="messages">
+        <li class="list-group-item list-group-item-danger">
+            Your Bidding Won!
+        </li>
+    </ul>
+    {% endif %}  
+    <h2>Listings: {{ listing.title }}</h2>
+    <div>
+        <div class="clearfix mb-2 border border-dark container">
+            <div class="float-left">
+                <img src="../../media/{{ listing.image }}" alt="{{ listing.title }}" width="170" height="170">
+            </div>
+            <div class="float-right">
+                <br>
+                <div>
+                    {% if  bidinfo.current_bid %}
+                    <p class="text-danger">
+                        Current Price: ${{ bidinfo.current_bid }}
+                    </p>
+                    {% else %}
+                    <p class="text-success">
+                        Current Price: ${{ listing.starting_bid }}
+                    </p>
+                    {% endif %}
+                </div>
+                <div>
+                    <form action="{% url 'to_bid' listing.id %}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ bid_form }}
+                        <br>
+                        <button class="btn btn-outline-success btn-lg" type="submit">Bid Now</button>
+                        </form>                
+                </div>
+                <br>
+                <div>
+                    <p>
+                        Starting Bid: ${{ listing.starting_bid }}
+                    </p>
+                </div>
+                <div>
+                    <p>
+                        Description: {{ listing.description }}
+                    </p>
+                </div>
+                <div>
+                    {% if watchlist %}
+                    <a href="{% url 'watchlist_add' listing.id %}" role="button" class="btn btn-outline-danger btn-lg">
+                        Delete from Watchlist
+                    </a>
+                    {% else %}
+                    <a href="{% url 'watchlist_add' listing.id %}" role="button" class="btn btn-outline-success btn-lg">
+                        Add to Watchlist
+                    </a>
+                    {% endif %}
+                </div>
+                    {% if isowner %}
+                    <div>
+                        <form action="{% url 'to_close' listing.id %}" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <br>
+                            <button class="btn btn-outline-danger btn-lg" type="submit">Close this bid</button>
+                            </form>                
+                    </div>
+                    {% endif %}
+                <br>
+            </div>
+        </div>
+        <div>
+            <div>
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form_c.as_p }}
+                    <br>
+                    <button class="btn btn-outline-success btn-lg" type="submit">Comment</button>
+                    </form>               
+            </div>
+            <div>
+                {% for comment in getcomment %}
+                <div>
+                    {{ comment.user }}
+                </div>
+                <div>
+                    {{ comment.commentmessage }}
+                </div>
+                <div>
+                    {{ comment.created_at }}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+            
+        <br>
+    </div>
+{% endblock %}

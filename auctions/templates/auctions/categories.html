@@ -1,0 +1,11 @@
+{% extends "auctions/layout.html" %}
+{% block body %}
+    <h2>Categories</h2>
+    <form action="{% url 'categories' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+            {{ form_cat.as_p }}
+            <br><br>
+        <button type="submit" value="Submit">Create Category</button>
+        </form>
+
+{% endblock %}
